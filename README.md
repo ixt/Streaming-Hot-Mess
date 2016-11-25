@@ -1,9 +1,8 @@
-# My First Youtube Downloader
+# Streaming Hot Mess
 
 ![Screenshot](First.png)
 
 Requirements:
 * Unix-like System
-* Youtube-dl
 * mpv
 

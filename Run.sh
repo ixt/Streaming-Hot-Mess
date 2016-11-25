@@ -9,16 +9,16 @@ while true; do
     rm .page
     cd videos
     while read entry; do
-        if [ ! -e $entry.mp4 ]; then
-            youtube-dl --max-views 10 --id -f 18 $entry
-            mpv $entry.mp4 --quiet --osc=no --geometry=$(($RANDOM % 100))%:$(($RANDOM % 100))% &
+        if [ ! -e $entry.video ]; then
+            ../Download.sh $entry
+            mpv $entry.video --quiet --osc=no --geometry=$(($RANDOM % 100))%:$(($RANDOM % 100))% &
         fi
     done < ../.currentvideos
     cd ..
-    ls ./videos -1 | sed -e 's/.mp4//g'  > .downloadedvideos
+    ls ./videos -1 | sed -e 's/.video//g'  > .downloadedvideos
     while read downloaded; do
         if [ ! $(grep $downloaded .currentvideos) ]; then
-            rm videos/$downloaded.mp4
+            rm videos/$downloaded.video
         fi
     done < .downloadedvideos
     (( COUNT++ ))
