@@ -1,4 +1,2 @@
-videos/*
-.currentvideos
-.downloadedvideos
 !videos/.gitkeep
+*
