@@ -37,20 +37,20 @@ done
 SOURCE="https://www.youtube.com/results?q=intitle%3A%22$SEARCHTERM%22&sp=EgIIAQ%253D%253D"
 
 while true; do
-    wget -O .page "$SOURCE"
-    cat .page | sort | uniq | sed -n 's/.*\(\"\/watch?v=\w*\"\).*/\1/p' | sed -e "s/\"\/watch?v=//g" -e "s/\"//g" > .currentvideos
+    wget -O .page "$SOURCE" -q --show-progress
+    cat .page | uniq | sed -n 's/.*\(\"\/watch?v=\w*\"\).*/\1/p' | sed -e "s/\"\/watch?v=//g" -e "s/\"//g" > .currentvideos
     rm .page
     cd videos
     while read entry; do
         if [ ! -e $entry.mp4 ]; then
             ../Download.sh $entry
-            mpv $entry.mp4 --quiet
+            vlc --one-instance --playlist-enqueue "$entry.mp4" &
         fi
     done < ../.currentvideos
     cd ..
     ls ./videos -1 | sed -e 's/.mp4//g'  > .downloadedvideos
     while read downloaded; do
-        if [ ! $(grep $downloaded .currentvideos) ]; then
+        if [ $(grep -q $downloaded .currentvideos) ]; then
             rm videos/$downloaded.mp4
         fi
     done < .downloadedvideos

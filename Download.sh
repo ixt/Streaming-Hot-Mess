@@ -32,6 +32,8 @@ wget "http://www.youtube.com/get_video_info?video_id=${1}" -qO- |\
 if egrep -q "(video%252Fmp4%.*quality%3Dmedium(%|\n)|quality%3Dmedium%.*video%252Fmp4(%|\n))" .furls; then
     egrep "(video%252Fmp4%.*quality%3Dmedium(%|\n)|quality%3Dmedium%.*video%252Fmp4(%|\n))" .furls |\
         egrep 'http|sig%3D' |sed -e 's/%26/\&/g;s/&/\n/g' > .tmp5
+else
+    exit 0
 fi
 
 sed -e 's/\n//g;s/sig%3D/\&signature%3D/g;s/url%3D//g;s/%25/%/g;s/%25/%/g;
