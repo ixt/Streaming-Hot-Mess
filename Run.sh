@@ -44,7 +44,7 @@ while true; do
     while read entry; do
         if [ ! -e $entry.mp4 ]; then
             ../Download.sh $entry
-            vlc --one-instance --playlist-enqueue "$entry.mp4" &
+            totem --enqueue "$entry.mp4" &
         fi
     done < ../.currentvideos
     cd ..

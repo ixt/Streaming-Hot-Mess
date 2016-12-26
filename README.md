@@ -1,8 +1,12 @@
 # Streaming Hot Mess
 
-![Screenshot](First.png)
+Automatically download and enqueue the newest videos uploaded to youtube with a
+title containing a stated phrase.
 
 Requirements:
-* Unix-like System
-* mpv
+* Unix or Unix-like system
+* Totem (or knowledge of shell enough to change the utility)
+
+> ./Run.sh -s "Search term" [-d "duration of waiting to refresh the content"]
+
 
